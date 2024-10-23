@@ -47,7 +47,7 @@ def etl_process():
     tracks = pd.concat(frames)
     #transformation
     tracks=tracks.drop(['mbid','streamable'], axis=1)
-    tracks['unix_time'] = tracks['date'].apply(lambda x: x['#uts'])
+    tracks['unix_time'] = tracks['date'].apply(lambda x: x['uts'])
     tracks['date'] = tracks['date'].apply(lambda x: x['#text'])
     tracks['date'] = tracks['date'].apply(lambda x: datetime.strptime(x, '%d %b %Y, %H:%M'))
     import ast
@@ -69,3 +69,4 @@ def etl_process():
     tracks=tracks.rename(columns={'name':'song_title'})
     full_tracks=pd.concat([tracks,listens], ignore_index=True)
     full_tracks.to_csv('Ewaoluwa.csv', index=False)
+etl_process()
