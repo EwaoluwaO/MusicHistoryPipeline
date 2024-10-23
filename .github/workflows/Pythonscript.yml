@@ -33,4 +33,4 @@ jobs:
       # Runs a set of commands using the runners shell
     - name: Run python script
       run: |
-        python script/lastfm.py
+        python script/last_fm_data.py
