@@ -3,9 +3,10 @@ def etl_process():
     import requests as rq
     from datetime import datetime
     import time
+    import os
 
     listens = pd.read_csv("Ewaoluwa.csv")
-    API_KEY = 'aa67bd14bbef2d0cc14a3bfaaa10517f'
+    API_KEY=os.get_env("API_KEY")
     USER_AGENT = 'Ewaoluwa'
     user='ewaoluwa'
     unix_time = int(listens.iloc[0]['unix_time'])
