@@ -1,3 +1,5 @@
+from datetime import date
+from datetime import datetime
 def etl_process():
     import pandas as pd
     import requests as rq
