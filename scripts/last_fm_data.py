@@ -5,7 +5,7 @@ def etl_process():
     import time
     import os
 
-    listens = pd.read_csv("result.csv")
+    listens = pd.read_csv("Ewaoluwa.csv")
     API_KEY=os.getenv("API_KEY")
     USER_AGENT = 'Ewaoluwa'
     user='ewaoluwa'
@@ -70,16 +70,21 @@ def etl_process():
     tracks['album']= tracks['album'].apply(lambda x: x['#text'])
     tracks=tracks.rename(columns={'name':'song_title'})
     full_tracks=pd.concat([tracks,listens], ignore_index=True)
-    full_tracks.to_csv('Ewaoluwa.csv', index=False)
+    csv_file = 'Ewaoluwatoday.csv'
+    full_tracks.to_csv( csv_file, index=False)
+    
     return full_tracks, csv_file
-df, csv_file=etl_process()
+full_tracks, csv_file=etl_process()
 
 def github_write(csv_file):
     from github import Github
     
     g = Github("REPO_KEY")
     
+    csv_data = full_tracks.to_csv(index=False)
+    timestamp=datetime.now()
+    filename=f"result_{timestamp.isoformat()}.csv"
     repo = g.get_repo('EwaoluwaO/MusicHistoryPipeline')
     
-    repo.create_file('result.csv', 'upload csv', csv_file, branch='main')
-github_write(csv_file)
+    repo.create_file(filename, 'upload csv', csv_data, branch='main')
+github_write(full_tracks, csv_file)
