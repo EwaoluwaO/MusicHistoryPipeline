@@ -80,7 +80,7 @@ def etl_process():
     return full_tracks, csv_file
 full_tracks, csv_file=etl_process()
 
-def github_write(csv_file):
+def github_write(full_tracks,csv_file):
     from github import Github
     
     g = Github("REPO_KEY")
