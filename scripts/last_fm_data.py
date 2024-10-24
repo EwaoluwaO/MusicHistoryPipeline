@@ -1,14 +1,14 @@
 from datetime import date
 from datetime import datetime
-  import pandas as pd
-    import requests as rq
-    from datetime import datetime
-    import time
-    import os
-    from dotenv import load_dotenv
+import pandas as pd
+import requests as rq
+from datetime import datetime
+import time
+import os
+from dotenv import load_dotenv
 
-    # Load environment variables from .env file
-    load_dotenv()
+# Load environment variables from .env file
+load_dotenv()
 def etl_process():
     listens = pd.read_csv("Ewaoluwa.csv")
     API_KEY=os.getenv("API_KEY")
