@@ -1,7 +1,6 @@
 from datetime import date
 from datetime import datetime
-def etl_process():
-    import pandas as pd
+  import pandas as pd
     import requests as rq
     from datetime import datetime
     import time
@@ -10,13 +9,13 @@ def etl_process():
 
     # Load environment variables from .env file
     load_dotenv()
-
+def etl_process():
     listens = pd.read_csv("Ewaoluwa.csv")
     API_KEY=os.getenv("API_KEY")
     USER_AGENT = 'Ewaoluwa'
     user='ewaoluwa'
     unix_time = int(listens.iloc[0]['unix_time'])
-    REPO_KEY=os.getenv("REPO_KEY")
+    
 
     def lastfmlookup(payload):
         headers= {'user-agent': USER_AGENT}
@@ -84,7 +83,7 @@ full_tracks, csv_file=etl_process()
 
 def github_write(full_tracks,csv_file):
     from github import Github
-    
+    REPO_KEY=os.getenv("REPO_KEY")
     g = Github("REPO_KEY")
     
     csv_data = full_tracks.to_csv(index=False)
