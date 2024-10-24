@@ -5,7 +5,7 @@ def etl_process():
     import time
     import os
 
-    listens = pd.read_csv("Ewaoluwa.csv")
+    listens = pd.read_csv("result.csv")
     API_KEY=os.getenv("API_KEY")
     USER_AGENT = 'Ewaoluwa'
     user='ewaoluwa'
