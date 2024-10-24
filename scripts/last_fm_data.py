@@ -10,6 +10,7 @@ def etl_process():
     USER_AGENT = 'Ewaoluwa'
     user='ewaoluwa'
     unix_time = int(listens.iloc[0]['unix_time'])
+    REPO_KEY=os.get_env("REPO_KEY")
 
     def lastfmlookup(payload):
         headers= {'user-agent': USER_AGENT}
@@ -70,4 +71,15 @@ def etl_process():
     tracks=tracks.rename(columns={'name':'song_title'})
     full_tracks=pd.concat([tracks,listens], ignore_index=True)
     full_tracks.to_csv('Ewaoluwa.csv', index=False)
-etl_process()
+    return full_tracks, csv_file
+df, csv_file=etl_process()
+
+def github_write(csv_file):
+    from github import Github
+    
+    g = Github("REPO_KEY")
+    
+    repo = g.get_repo('EwaoluwaO/MusicHistoryPipeline')
+    
+    repo.create_file('result.csv', 'upload csv', csv_file, branch='main')
+github_write(csv_file)
