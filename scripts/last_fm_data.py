@@ -4,6 +4,10 @@ def etl_process():
     from datetime import datetime
     import time
     import os
+    from dotenv import load_dotenv
+
+    # Load environment variables from .env file
+    load_dotenv()
 
     listens = pd.read_csv("Ewaoluwa.csv")
     API_KEY=os.getenv("API_KEY")
