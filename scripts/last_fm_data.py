@@ -6,11 +6,11 @@ def etl_process():
     import os
 
     listens = pd.read_csv("Ewaoluwa.csv")
-    API_KEY=os.get_env("API_KEY")
+    API_KEY=os.getenv("API_KEY")
     USER_AGENT = 'Ewaoluwa'
     user='ewaoluwa'
     unix_time = int(listens.iloc[0]['unix_time'])
-    REPO_KEY=os.get_env("REPO_KEY")
+    REPO_KEY=os.getenv("REPO_KEY")
 
     def lastfmlookup(payload):
         headers= {'user-agent': USER_AGENT}
