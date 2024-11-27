@@ -84,7 +84,7 @@ full_tracks, csv_file=etl_process()
 def github_write(full_tracks,csv_file):
     from github import Github
     REPO_KEY=os.getenv("REPO_KEY")
-    g = Github("REPO_KEY")
+    g = Github(REPO_KEY)
     
     csv_data = full_tracks.to_csv(index=False)
     timestamp=datetime.now()
